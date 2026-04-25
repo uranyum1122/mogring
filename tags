@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딸칵! 행운을 부르는 모그링 이벤트 🐢</title>
+    <style>
+        body {
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #FFFDF0; /* 모그링 옐로우 */
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0;
+        }
+        .card {
+            background: white; padding: 40px 20px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center; width: 85%; max-width: 350px;
+            border: 4px solid #FFE600;
+        }
+        .turtle { font-size: 60px; margin-bottom: 10px; }
+        h1 { font-size: 22px; color: #333; margin-bottom: 10px; }
+        p { font-size: 14px; color: #777; line-height: 1.5; margin-bottom: 25px; }
+        
+        .main-btn {
+            background-color: #FFE600; color: #333;
+            border: none; padding: 20px; width: 100%;
+            font-size: 18px; font-weight: bold; border-radius: 15px;
+            cursor: pointer; box-shadow: 0 5px 0 #E6CF00;
+            transition: all 0.1s;
+        }
+        .main-btn:active { transform: translateY(4px); box-shadow: none; }
+        
+        #status { margin-top: 20px; font-size: 13px; color: #E1306C; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="turtle">🐢</div>
+    <h1><리뷰 전 읽어주세요></h1>
+    <h3>선 팔로우 후 게시물 업로드 부탁드립니다</h3>
+    <h3>태그가 복사돼 있습니다 <br> 그냥 붙여넣으세요</h3>
+    <h4>버튼을 누르면 [ 모그링 ] 인스타그램으로 <br>이동합니다.</h4>
+    <p>버튼을 누르면 <b>태그가 복사</b>되고<br><b>모그링 인스타그램</b>으로 연결됩니다.</p>
+    <p>먼저 팔로우 하신 뒤 게시물 부탁드립니다.</p>
+    
+    <button class="main-btn" onclick="startMagic()">태그 복사 & 인스타 이동</button>
+    
+    <div id="status">태그 복사 완료! 인스타로 이동합니다... 🚀</div>
+</div>
+
+<textarea id="tagArea" style="position: absolute; left: -9999px;">#속초링부기 #속초소품샵 #링부기 #속초가볼만한곳 #속초감성소품샵 #속초핸드메이드 #속초소품샵투어</textarea>
+
+<script>
+    function startMagic() {
+        // 1. 태그 복사
+        const tagArea = document.getElementById('tagArea');
+        tagArea.select();
+        tagArea.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        
+        // 2. 상태 표시
+        document.getElementById('status').style.display = 'block';
+        
+        // 3. 인스타그램 앱 실행 (딥링크)
+        // 잠시 후 이동 (복사된걸 인지할 시간 0.5초 부여)
+        setTimeout(() => {
+            // 인스타그램 앱 프로필로 바로가기 (앱이 있으면 앱, 없으면 웹으로 연결)
+            window.location.href = "instagram://user?username=mog.ring";
+            
+            // 앱이 안 열릴 경우를 대비한 웹 주소 백업
+            setTimeout(() => {
+                window.location.href = "https://www.instagram.com/mog.ring/";
+            }, 1000);
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
