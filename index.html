@@ -1,80 +1,472 @@
-<!DOCTYPE html>
-<!-- saved from url=(0063)file:///C:/Users/hgs00/Downloads/gemini-code-1777090041714.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>딸칵! 행운을 부르는 모그링 이벤트 🐢</title>
-    <style>
-        body {
-            font-family: 'Apple SD Gothic Neo', sans-serif;
-            background-color: #FFFDF0; /* 모그링 옐로우 */
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; margin: 0;
-        }
-        .card {
-            background: white; padding: 40px 20px; border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: center; width: 85%; max-width: 350px;
-            border: 4px solid #FFE600;
-        }
-        .turtle { font-size: 60px; margin-bottom: 10px; }
-        h1 { font-size: 22px; color: #333; margin-bottom: 10px; }
-        p { font-size: 14px; color: #777; line-height: 1.5; margin-bottom: 25px; }
-        
-        .main-btn {
-            background-color: #FFE600; color: #333;
-            border: none; padding: 20px; width: 100%;
-            font-size: 18px; font-weight: bold; border-radius: 15px;
-            cursor: pointer; box-shadow: 0 5px 0 #E6CF00;
-            transition: all 0.1s;
-        }
-        .main-btn:active { transform: translateY(4px); box-shadow: none; }
-        
-        #status { margin-top: 20px; font-size: 13px; color: #E1306C; font-weight: bold; display: none; }
-    </style>
-</head>
-<body>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>모그링 연락처 및 명함 안내</title>
+  <meta name="description" content="모그링 대표 연락처와 모바일 명함을 저장할 수 있는 페이지입니다." />
+  <meta name="theme-color" content="#F7C948" />
 
-<div class="card">
-    <div class="turtle">🐢</div>
-    <h1>&lt;리뷰 전 읽어주세요&gt;</h1>
-    <h3>선 팔로우 후 게시물 업로드 부탁드립니다</h3>
-    <h3>태그가 복사돼 있습니다 <br> 그냥 붙여넣으세요</h3>
-    <h4>버튼을 누르면 [ 모그링 ] 인스타그램으로 <br>이동합니다.</h4>
-    <p>버튼을 누르면 <b>태그가 복사</b>되고<br><b>모그링 인스타그램</b>으로 연결됩니다.</p>
-    <p>먼저 팔로우 하신 뒤 게시물 부탁드립니다.</p>
-    
-    <button class="main-btn" onclick="startMagic()">태그 복사 &amp; 인스타 이동</button>
-    
-    <div id="status">태그 복사 완료! 인스타로 이동합니다... 🚀</div>
-</div>
-
-<textarea id="tagArea" style="position: absolute; left: -9999px;">#속초링부기 #속초소품샵 #링부기 #속초가볼만한곳 #속초감성소품샵 #속초핸드메이드 #속초소품샵투어</textarea>
-
-<script>
-    function startMagic() {
-        // 1. 태그 복사
-        const tagArea = document.getElementById('tagArea');
-        tagArea.select();
-        tagArea.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        
-        // 2. 상태 표시
-        document.getElementById('status').style.display = 'block';
-        
-        // 3. 인스타그램 앱 실행 (딥링크)
-        // 잠시 후 이동 (복사된걸 인지할 시간 0.5초 부여)
-        setTimeout(() => {
-            // 인스타그램 앱 프로필로 바로가기 (앱이 있으면 앱, 없으면 웹으로 연결)
-            window.location.href = "instagram://user?username=mog.ring";
-            
-            // 앱이 안 열릴 경우를 대비한 웹 주소 백업
-            setTimeout(() => {
-                window.location.href = "https://www.instagram.com/mog.ring/";
-            }, 1000);
-        }, 500);
+  <style>
+    :root {
+      --cream: #fff8e8;
+      --butter: #f7c948;
+      --butter-soft: #fff0b8;
+      --brown: #3b2a1f;
+      --brown-soft: #6c4d35;
+      --line: #f0c55b;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(77, 47, 12, 0.16);
     }
-</script>
 
+    * {
+      box-sizing: border-box;
+    }
 
-</body></html>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at top left, rgba(247, 201, 72, 0.24), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 220, 120, 0.36), transparent 30%),
+        var(--cream);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px;
+    }
+
+    .page {
+      width: min(720px, 100%);
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.86);
+      border: 2px dashed var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 34px 22px 26px;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-badge {
+      width: fit-content;
+      margin: 0 auto 22px;
+      padding: 10px 28px;
+      border: 2px dashed var(--line);
+      border-radius: 999px;
+      background: #fffdf6;
+      font-size: 34px;
+      line-height: 1;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0.02em;
+      color: #4a2f1f;
+      box-shadow: 0 8px 22px rgba(162, 110, 22, 0.12);
+    }
+
+    .brand-badge span {
+      color: var(--butter);
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(30px, 7vw, 52px);
+      letter-spacing: -0.05em;
+      line-height: 1.18;
+    }
+
+    h1 .yellow {
+      color: #d99a12;
+    }
+
+    .subtitle {
+      margin: 16px auto 0;
+      text-align: center;
+      font-size: clamp(20px, 5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .desc {
+      margin: 14px auto 26px;
+      max-width: 480px;
+      text-align: center;
+      color: var(--brown-soft);
+      font-size: 16px;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .profile-box {
+      background: #fffdf7;
+      border: 1px solid rgba(240, 197, 91, 0.65);
+      border-radius: 24px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 12px 26px rgba(121, 78, 14, 0.08);
+    }
+
+    .name {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 5px;
+    }
+
+    .title {
+      font-size: 18px;
+      color: var(--brown-soft);
+      font-weight: 700;
+    }
+
+    .phone {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--butter-soft);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--brown);
+      text-decoration: none;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto 22px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      width: 100%;
+      padding: 17px 18px;
+      border-radius: 18px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+      display: block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(94, 61, 12, 0.14);
+    }
+
+    .btn-primary {
+      background: var(--butter);
+      color: var(--brown);
+    }
+
+    .btn-secondary {
+      background: var(--brown);
+      color: #fff8df;
+    }
+
+    .btn-light {
+      background: #fff8dd;
+      color: var(--brown);
+      border: 1px solid rgba(217, 154, 18, 0.25);
+    }
+
+    .business-card-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fffdf7;
+      border-radius: 26px;
+      border: 1px solid rgba(240, 197, 91, 0.65);
+      padding: 18px;
+      box-shadow: 0 12px 26px rgba(121, 78, 14, 0.08);
+    }
+
+    .business-card-label {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--brown-soft);
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+      background: white;
+    }
+
+    .notice {
+      max-width: 520px;
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 245, 204, 0.86);
+      color: var(--brown-soft);
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(59, 42, 31, 0.62);
+    }
+
+    .deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.9;
+      user-select: none;
+    }
+
+    .deco.one {
+      top: 26px;
+      left: 26px;
+      font-size: 34px;
+    }
+
+    .deco.two {
+      top: 24px;
+      right: 26px;
+      font-size: 32px;
+    }
+
+    .deco.three {
+      bottom: 24px;
+      left: 24px;
+      font-size: 28px;
+    }
+
+    @media (min-width: 620px) {
+      .actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .actions .wide {
+        grid-column: 1 / -1;
+      }
+
+      .card {
+        padding: 42px 38px 34px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .actions,
+      .notice,
+      .footer {
+        display: none;
+      }
+
+      .card {
+        box-shadow: none;
+        border: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card" aria-label="모그링 모바일 명함">
+      <div class="deco one">🌼</div>
+      <div class="deco two">🎁</div>
+      <div class="deco three">💛</div>
+
+      <div class="brand-badge">Mog<span>l</span>ing</div>
+
+      <h1><span class="yellow">모그링</span> 연락처 및 명함 안내</h1>
+      <p class="subtitle">아래 버튼으로 저장해보세요</p>
+      <p class="desc">
+        연락처는 vCard 형식으로 저장할 수 있으며, 명함 이미지는 휴대폰 갤러리에 저장해 사용할 수 있습니다.
+      </p>
+
+      <div class="profile">
+        <div class="profile-box">
+          <div class="name">남경미</div>
+          <div class="title">모그링 대표</div>
+          <a class="phone" href="tel:050713278820">📞 0507-1327-8820</a>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="button" id="saveVcard">연락처 저장하기</button>
+        <button class="btn btn-secondary" type="button" id="downloadCard">명함 이미지 저장하기</button>
+        <a class="btn btn-light wide" href="tel:050713278820">전화 걸기</a>
+      </div>
+
+      <div class="business-card-wrap">
+        <div class="business-card-label">미리보기 명함 이미지</div>
+        <canvas id="businessCard" width="1200" height="700" aria-label="모그링 명함 이미지 미리보기"></canvas>
+      </div>
+
+      <div class="notice">
+        아이폰은 다운로드 후 연락처 앱에서 추가 화면이 열릴 수 있습니다. 안드로이드는 기종에 따라 “연락처에 추가” 또는 “파일 다운로드”로 표시될 수 있습니다.
+      </div>
+    </section>
+
+    <div class="footer">© Mogling. Mobile business card page.</div>
+  </main>
+
+  <script>
+    const contact = {
+      firstName: "경미",
+      lastName: "남",
+      fullName: "남경미",
+      org: "모그링",
+      title: "대표",
+      phone: "0507-1327-8820"
+    };
+
+    function makeVCard() {
+      return [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:${contact.lastName};${contact.firstName};;;`,
+        `FN:${contact.fullName}`,
+        `ORG:${contact.org}`,
+        `TITLE:${contact.title}`,
+        `TEL;TYPE=WORK,VOICE:${contact.phone}`,
+        "END:VCARD"
+      ].join("\n");
+    }
+
+    function downloadTextFile(filename, text, mime) {
+      const blob = new Blob([text], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("saveVcard").addEventListener("click", () => {
+      downloadTextFile("모그링_남경미_대표.vcf", makeVCard(), "text/vcard;charset=utf-8");
+    });
+
+    const canvas = document.getElementById("businessCard");
+    const ctx = canvas.getContext("2d");
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawBusinessCard() {
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const gradient = ctx.createLinearGradient(0, 0, w, h);
+      gradient.addColorStop(0, "#fff8e8");
+      gradient.addColorStop(1, "#fff0b8");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "rgba(247, 201, 72, 0.22)";
+      ctx.beginPath();
+      ctx.arc(90, 80, 180, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.74)";
+      roundRect(ctx, 60, 60, w - 120, h - 120, 42);
+      ctx.fill();
+
+      ctx.strokeStyle = "#e9b84d";
+      ctx.lineWidth = 5;
+      ctx.setLineDash([18, 14]);
+      roundRect(ctx, 85, 85, w - 170, h - 170, 34);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#3b2a1f";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+
+      ctx.font = "bold 76px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("Mogling", 135, 190);
+
+      ctx.fillStyle = "#d99a12";
+      ctx.font = "bold 38px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("모그링", 140, 252);
+
+      ctx.fillStyle = "#3b2a1f";
+      ctx.font = "bold 92px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("남경미", 135, 390);
+
+      ctx.fillStyle = "#6c4d35";
+      ctx.font = "bold 42px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("모그링 대표", 140, 458);
+
+      ctx.fillStyle = "#3b2a1f";
+      ctx.font = "bold 46px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("0507-1327-8820", 140, 565);
+
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#d99a12";
+      ctx.font = "bold 54px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("CONTACT", w - 135, 190);
+
+      ctx.fillStyle = "#6c4d35";
+      ctx.font = "30px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("QR로 저장하는", w - 135, 255);
+      ctx.fillText("모바일 명함", w - 135, 295);
+
+      ctx.fillStyle = "#f7c948";
+      ctx.font = "72px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("💛", w - 145, 555);
+
+      ctx.fillStyle = "rgba(59, 42, 31, 0.10)";
+      ctx.font = "bold 150px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("M", w - 130, h - 75);
+    }
+
+    drawBusinessCard();
+
+    document.getElementById("downloadCard").addEventListener("click", () => {
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = "모그링_남경미_대표_명함.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  </script>
+</body>
+</html>
